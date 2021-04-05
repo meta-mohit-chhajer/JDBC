@@ -53,6 +53,19 @@ public class DbmsAssn5 {
 	    }catch(SQLException e){
 	    	e.printStackTrace();
 	    }
+		try{
+	    	con.setAutoCommit(false);
+	    	con.commit();
+	    	System.out.println("Successfully commit changes to database");
+	    }
+	    catch(SQLException e){
+	    	try{
+	    		con.rollback();
+	    		System.out.println("Successfully rolled back from the database");
+	    	}catch(SQLException e1){
+	    		System.out.println("Could not rollback updates"+e1.getMessage());
+	    	}
+	    }
 	    return orders.size();
 	}
 	
@@ -73,10 +86,24 @@ public class DbmsAssn5 {
 			}
 			for(Category category:parentList)
 				System.out.println("Category : "+category.getId()+"Name : "+category.getName());
+			con.close();
 			
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		try{
+	    	con.setAutoCommit(false);
+	    	con.commit();
+	    	System.out.println("Successfully commit changes to database");
+	    }
+	    catch(SQLException e){
+	    	try{
+	    		con.rollback();
+	    		System.out.println("Successfully rolled back from the database");
+	    	}catch(SQLException e1){
+	    		System.out.println("Could not rollback updates"+e1.getMessage());
+	    	}
+	    }
 	}
 	
 	/*
@@ -91,9 +118,23 @@ public class DbmsAssn5 {
 			Connection con=getConnection();
 			PreparedStatement pmtst=con.prepareStatement(query);
 			inactive=pmtst.executeUpdate();
+			con.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		try{
+	    	con.setAutoCommit(false);
+	    	con.commit();
+	    	System.out.println("Successfully commit changes to database");
+	    }
+	    catch(SQLException e){
+	    	try{
+	    		con.rollback();
+	    		System.out.println("Successfully rolled back from the database");
+	    	}catch(SQLException e1){
+	    		System.out.println("Could not rollback updates"+e1.getMessage());
+	    	}
+	    }
 		return inactive;
 	
 	}
@@ -124,6 +165,19 @@ public class DbmsAssn5 {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		try{
+	    	con.setAutoCommit(false);
+	    	con.commit();
+	    	System.out.println("Successfully commit changes to database");
+	    }
+	    catch(SQLException e){
+	    	try{
+	    		con.rollback();
+	    		System.out.println("Successfully rolled back from the database");
+	    	}catch(SQLException e1){
+	    		System.out.println("Could not rollback updates"+e1.getMessage());
+	    	}
+	    }
 		return result.length;
 	}
 }
